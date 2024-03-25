@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" , initial scale="1">
+  <title>Money Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" type="x-icon" href="images/moneyBags.png">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+      <div class="container-fluid">
+        <a id="logo" class="navbar-brand" href="main.html">
+          <img src="images/moneyBags.png">
+        </a>
+        <div class="navbar-text text-white me-3" id="userGreeting"></div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="main.html">Main</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="income.html">Income</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="outcome.html">Outcome</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="aboutUs.html">About Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="text-center">
+      <p id="income" class="h5"></p>
+    </div>
+  
+    <div class="form-floating mb-3">
+
+      <input type="text" class="form-control" id="namaTransaksi" placeholder="name">
+      <label for="namaTransaksi">Nama Transaksi</label>
+      
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="nominalTransaksi" placeholder="name">
+      <label for="nominalTransaksi">Nominal Transaksi</label>
+    </div>
+
+    <select class="form-select form-select-sm" id="tipeTransaksi">
+      <option selected>Tipe Transaksi</option>
+      <option value="Makan">Makan</option>
+      <option value="Main">Main</option>
+      <option value="Edukasi">Edukasi</option>
+      <option value="Belanja">Belanja</option>
+      <option value="Lainnya">Lainnya</option>  
+  </select>
+
+    <div class="text-center mt-3">
+      <button id="send" class="btn btn-primary" type="button">Submit</button>
+    </div>
+    
+    
+
+  </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    const userName = localStorage.getItem('userName');
+    if (userName) {
+      document.getElementById('userGreeting').textContent = 'Hello, ' + userName;
+      document.getElementById('income').textContent = userName + "'s Income";
+    }
+
+    $("#send").click(function () {
+      let namaTransaksi = $('#namaTransaksi').val();
+      let nominalTransaksi = $('#nominalTransaksi').val();
+      let tipeTransaksi = $('#tipeTransaksi').val();
+      let tipe = "incomeData";
+
+      if (!namaTransaksi || !nominalTransaksi || !tipeTransaksi) {
+        window.alert("Please fill in all the fields.");
+        return;
+
+      } else {
+        localStorage.setItem('transactionName', namaTransaksi);
+        localStorage.setItem('transactionNominal', nominalTransaksi);
+        localStorage.setItem('transactionType', tipeTransaksi);
+        localStorage.setItem('transactionIO', 'I');
+
+        let storedTransactionName = localStorage.getItem('transactionName');
+        let storedTransactionNominal = localStorage.getItem('transactionNominal');
+        let storedTransactionType = localStorage.getItem('transactionType');
+        let storedTransactionIO = localStorage.getItem('transactionIO');
+
+        if (storedTransactionName && storedTransactionNominal && storedTransactionType) {
+          let mainData = localStorage.getItem('mainData') ? localStorage.getItem('mainData').split(',') : [];
+          mainData.push(`${storedTransactionName}-${storedTransactionNominal}-${storedTransactionType}-${storedTransactionIO}`);
+          localStorage.setItem('mainData', mainData.toString());
+        }
+
+        window.alert("Transaksi Berhasil Masuk");
+        window.location.href = 'main.html';
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>

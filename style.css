@@ -1,0 +1,51 @@
+@media (min-width: 1200px) {
+
+    .container{
+        max-width: 970px;
+        font-family: Arial;
+    }
+
+}
+
+#logo img
+{
+    width: 80px;
+}
+
+
+
+body
+{
+    background-color: whitesmoke;
+}
+
+.card-title
+{
+    font-weight: bold;
+}
+
+.form-select option
+{
+    padding-top: auto;
+}
+
+.card-texts{
+    font-weight: bold;
+    font-size: 30px;
+    text-align: right;
+}
+
+.card-text{
+    font-weight: bold;
+    text-align: left;
+    float: left;
+}
+
+#balance{
+    height: 228px;
+}
+
+.moneyTypes {
+    font-weight: bold;
+    font-size: 40px;
+}
